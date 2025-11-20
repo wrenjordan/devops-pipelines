@@ -1,0 +1,30 @@
+# Name of Pipeline
+name: CI Pipeline
+
+# Defines the trigger event in GitHub that starts pipeline (i.e. a git push to main branch)
+on:
+  push:
+    branches: [ main ] 
+
+# Defines the group of steps that run together that runs on Ubuntu (i.e. container)
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+# Instructions to be ran
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+      
+
